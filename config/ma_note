@@ -1,0 +1,406 @@
+Positionnement du SaaS
+
+Une plateforme de gestion locative permettant aux bailleurs de centraliser leurs biens, locataires, baux, loyers et incidents de maintenance depuis une seule interface.
+
+La cible initiale doit être :
+
+B2C : propriétaires particuliers et petits/moyens bailleurs, plutôt que les agences.
+
+Pourquoi ? Parce que cibler simultanément bailleurs + agences + syndics + prestataires rendrait le produit beaucoup trop large pour 4 jours.
+
+BLOC 1 — Stratégie et marché
+1.1 Cible
+
+Propriétaires particuliers / bailleurs.
+
+On peut viser particulièrement les propriétaires qui possèdent plusieurs logements.
+
+Exemple :
+
+Une personne possède 5 appartements à Cotonou et doit suivre les loyers, contrats, locataires et problèmes de chaque logement.
+
+Les agences immobilières pourront être une cible V2.
+
+1.2 Zone géographique
+
+Bénin pour le lancement.
+
+Mais architecture pensée dès le départ pour l'Afrique de l'Ouest :
+
+FCFA ;
+Mobile Money ;
+paiements locaux ;
+français ;
+possibilité d'ajouter d'autres pays plus tard.
+
+On ne cherche surtout pas à faire une plateforme internationale dès le MVP.
+
+1.3 Modèle économique
+
+Pour moi :
+
+Abonnement mensuel basé sur le nombre de biens gérés.
+
+Par exemple, à tester plus tard :
+
+1–3 biens : gratuit ou petit abonnement ;
+4–10 biens : abonnement standard ;
+11+ biens : abonnement professionnel.
+
+Pourquoi par bien ?
+
+Parce que la valeur du SaaS augmente naturellement avec le nombre de logements du bailleur.
+
+La commission sur les loyers peut éventuellement arriver plus tard.
+
+1.4 Concurrents
+
+On peut étudier :
+
+Rentila ;
+Buildium ;
+AppFolio ;
+solutions immobilières locales.
+
+Mais on ne cherche pas à copier leur design.
+
+Notre inspiration doit plutôt être :
+
+simplicité + gestion financière claire + expérience adaptée aux bailleurs africains.
+
+BLOC 2 — Rôles utilisateurs
+
+Pour le MVP, je ferais seulement 3 rôles.
+
+👤 1. Bailleur
+
+C'est l'utilisateur principal.
+
+Il peut :
+
+ajouter ses biens ;
+ajouter ses locataires ;
+créer/gérer les baux ;
+suivre les loyers ;
+voir les impayés ;
+gérer les demandes de maintenance ;
+consulter ses revenus.
+🧑‍💼 2. Locataire
+
+Interface beaucoup plus simple.
+
+Il peut :
+
+consulter son bail ;
+voir son loyer ;
+payer ;
+consulter ses paiements ;
+signaler un problème.
+⚙️ 3. Admin plateforme
+
+Pour l'équipe qui gère le SaaS :
+
+utilisateurs ;
+biens ;
+abonnements ;
+statistiques ;
+support.
+Pas maintenant
+
+❌ Agent immobilier
+❌ Syndic
+❌ Prestataire de maintenance avec compte propre
+
+Ces rôles peuvent venir en V2.
+
+BLOC 3 — Fonctionnalités
+
+C'est ici qu'il faut être très stricts.
+
+🟢 MVP — 4 jours
+
+Je sélectionnerais seulement :
+
+1. Gestion des biens
+ajouter un bien ;
+photos ;
+adresse/localisation ;
+type ;
+nombre de pièces ;
+loyer ;
+statut : occupé / disponible.
+2. Gestion des locataires
+identité ;
+contact ;
+bien occupé ;
+historique des paiements.
+3. Gestion des baux
+date de début ;
+date de fin ;
+montant du loyer ;
+dépôt de garantie ;
+statut.
+4. Suivi des loyers
+
+Le bailleur voit :
+
+LOYERS DU MOIS
+
+Appartement A     120 000   ✅ Payé
+Appartement B     100 000   🔴 Impayé
+Appartement C     150 000   ⏳ En attente
+
+Total attendu     370 000
+Total encaissé    270 000
+Impayés           100 000
+5. Dashboard financier
+
+C'est l'écran clé.
+
+Revenus du mois
+850 000 FCFA
+
+Loyers encaissés
+720 000 FCFA
+
+Impayés
+130 000 FCFA
+
+Biens
+12
+
+Taux d'occupation
+91 %
+6. Maintenance
+
+Très simple dans le MVP :
+
+Le locataire signale :
+
+« Fuite d'eau dans la salle de bain. »
+
+Le bailleur voit :
+
+🔴 URGENT
+Fuite d'eau
+
+Appartement B
+Locataire : X
+
+Statut : Nouveau
+
+Puis :
+
+Nouveau → En cours → Résolu
+
+🟡 V2
+
+On garde pour plus tard :
+
+paiement Mobile Money intégré ;
+FedaPay ;
+notifications SMS/WhatsApp ;
+messagerie ;
+signature électronique ;
+prestataires de maintenance ;
+comptabilité avancée ;
+génération automatique de documents ;
+rappels automatiques ;
+gestion multi-agences ;
+analytics avancés.
+🔴 Pas maintenant
+
+La visite virtuelle.
+
+C'est jolie pour une démo, mais ça ne résout pas le problème central du bailleur.
+
+BLOC 4 — Identité
+
+Je proposerais un positionnement :
+
+Ton
+
+Moderne + professionnel + accessible.
+
+Pas trop institutionnel.
+
+Pas « luxe immobilier ».
+
+Le produit doit donner :
+
+Confiance + contrôle + simplicité.
+
+Couleurs
+
+Je partirais sur :
+
+bleu profond comme couleur principale ;
+blanc ;
+gris très clair ;
+une couleur d'accent pour les actions ;
+vert pour les paiements réussis ;
+rouge pour les impayés/urgences.
+Typographie
+
+Inter est un excellent choix pour le MVP.
+
+Pas besoin de perdre du temps à chercher une police exotique.
+
+Mode
+
+Light uniquement pour le MVP.
+
+Le dark mode peut venir plus tard.
+
+BLOC 5 — Technique
+5.1
+
+Web app responsive.
+
+Pas d'application native pendant les 4 jours.
+
+Le responsive permettra au bailleur d'utiliser le SaaS :
+
+ordinateur ;
+tablette ;
+téléphone.
+
+Et si le produit fonctionne, on pourra ensuite faire React Native/Expo.
+
+5.2
+
+Français uniquement.
+
+L'anglais pourra venir plus tard.
+
+5.3
+
+Oui, low-bandwidth.
+
+Très important pour le marché cible.
+
+Donc :
+
+images optimisées ;
+peu d'animations ;
+pas de vidéos lourdes ;
+chargement rapide ;
+interface légère.
+BLOC 6 — Premier prompt Stitch
+
+⚠️ Là, je serais encore plus strict.
+
+Ne demandez surtout pas 10 écrans à Stitch dès le premier prompt.
+
+On veut obtenir un design cohérent avant de multiplier les pages.
+
+Je demanderais 5 écrans :
+1. Landing page
+
+Pour présenter :
+
+« Gérez vos biens. Suivez vos loyers. Gardez le contrôle. »
+
+CTA :
+
+Commencer gratuitement
+
+2. Connexion
+
+Simple :
+
+Bienvenue sur [Nom]
+
+Email
+Mot de passe
+
+[Se connecter]
+
+Mot de passe oublié ?
+3. Dashboard bailleur ⭐
+
+Écran prioritaire.
+
+Il doit montrer :
+
+revenus ;
+loyers encaissés ;
+impayés ;
+nombre de biens ;
+taux d'occupation ;
+prochains loyers ;
+maintenance récente.
+4. Liste des biens
+Mes biens
+
+[+ Ajouter un bien]
+
+Appartement Akpakpa
+120 000 FCFA
+🟢 Occupé
+
+Appartement St Michel
+150 000 FCFA
+🟢 Occupé
+
+Studio Fidjrossè
+80 000 FCFA
+🔵 Disponible
+5. Détail d'un bien
+
+C'est ici qu'on rassemble :
+
+Appartement Akpakpa
+
+📍 Adresse
+💰 120 000 FCFA/mois
+👤 Locataire
+📄 Bail
+💳 Paiements
+🔧 Maintenance
+🖥️ Layout
+
+Sidebar + zone de contenu.
+
+Pour le dashboard desktop :
+
+┌──────────────┬───────────────────────────────┐
+│              │                               │
+│   LOGO       │  Bonjour Huguette 👋          │
+│              │                               │
+│ Dashboard    │  KPI KPI KPI KPI             │
+│ Biens        │                               │
+│ Locataires   │  ┌─────────────────────────┐  │
+│ Loyers       │  │ Revenus / Loyers        │  │
+│ Maintenance  │  │                         │  │
+│              │  └─────────────────────────┘  │
+│ Paramètres   │                               │
+│              │  Paiements récents            │
+└──────────────┴───────────────────────────────┘
+
+Sur mobile, la sidebar devient une navigation adaptée au téléphone.
+
+🎯 Et surtout : votre MVP réel
+
+Si demain l'équipe commence à dire :
+
+« On pourrait aussi ajouter les agences... »
+
+« Et une marketplace... »
+
+« Et les visites virtuelles... »
+
+« Et l'IA... »
+
+
+Votre MVP doit pouvoir se résumer en une phrase :
+
+« Un bailleur peut enregistrer ses biens, associer ses locataires et suivre ses loyers et incidents depuis un tableau de bord unique. »
+
+Si vous réussissez parfaitement ça, votre démo sera déjà solide.
+
+Et pour le hackathon, je donnerais la priorité dans cet ordre :
+
+Dashboard bailleur → Biens → Locataires/Baux → Loyers → Maintenance.
+
+Le paiement Mobile Money peut être simulé dans la démo si l'intégration réelle est trop risquée pour les 4 jours. Ensuite, si le produit est retenu, on l'intégrera proprement.

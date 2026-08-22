@@ -1,0 +1,116 @@
+-- 014 : Synchro des groupes de chat par trigger BDD
+-- Les groupes standards (Tai, Mahikari-tai, Buntai *, Juntai-in, Ados) sont
+-- recalculés automatiquement à chaque changement de membre (rôle, statut,
+-- mission, buntai, pays). RLS stricte conservée : les membres n'écrivent
+-- jamais sur chat_groups (sauf groupes directs).
+-- Les groupes "directs" (conversations privées) ne sont PAS touchés.
+
+-- Recalcule les groupes standards d'un pays
+create or replace function public.refresh_chat_groups(p_country text)
+returns void
+language plpgsql
+security definer
+set search_path to 'public'
+as $function$
+declare
+  v_created_by uuid;
+  r record;
+begin
+  if p_country is null then return; end if;
+
+  select id into v_created_by
+  from public.users
+  where country = p_country
+  order by created_at
+  limit 1;
+
+  -- Crée les groupes standards manquants du pays (uniquement s'il existe au
+  -- moins un user : created_by est NOT NULL. Sinon, le trigger les créera
+  -- à la première inscription d'un membre du pays)
+  if v_created_by is not null then
+    insert into public.chat_groups (name, type, buntai, member_ids, member_count, managed_by_roles, created_by, country)
+    select v.name, v.type, v.buntai, '[]'::jsonb, 0, v.managed_by_roles, v_created_by, p_country
+    from (values
+      ('Tai', 'general', null::public.buntai_type, '[]'::jsonb),
+      ('Mahikari-tai', 'mahikari-tai', null, '[]'::jsonb),
+      ('Buntai Garçons', 'buntai', 'garcon', '["buntaicho-garcons"]'::jsonb),
+      ('Buntai Filles', 'buntai', 'fille', '["buntaicho-filles"]'::jsonb),
+      ('Buntai Juntai-in', 'buntai', null, '["leader-jti"]'::jsonb),
+      ('Buntai Ados', 'buntai', null, '["leader-ados"]'::jsonb)
+    ) as v(name, type, buntai, managed_by_roles)
+    where not exists (
+      select 1 from public.chat_groups g
+      where g.name = v.name and g.country = p_country
+    );
+  end if;
+
+  -- Recalcule les membres de chaque groupe standard du pays
+  for r in select id, name
+           from public.chat_groups
+           where country = p_country and type <> 'direct' loop
+    update public.chat_groups g
+    set member_ids = m.ids,
+        member_count = m.cnt
+    from (
+      select coalesce(jsonb_agg(u.id::text order by u.full_name), '[]'::jsonb) as ids,
+             count(u.id)::int as cnt
+      from public.users u
+      where u.country = p_country and u.status = 'active'
+        and case r.name
+          when 'Tai' then true
+          when 'Mahikari-tai' then u.mission = 'mahikari-tai'
+          when 'Buntai Garçons' then u.buntai = 'garcon'
+          when 'Buntai Filles' then u.buntai = 'fille'
+          when 'Buntai Juntai-in' then u.mission = 'juntai-in'
+          when 'Buntai Ados' then u.mission = 'ados'
+          else false end
+    ) m
+    where g.id = r.id;
+  end loop;
+end;
+$function$;
+
+-- Trigger : recalcule à chaque changement impactant l'appartenance aux groupes
+create or replace function public.trg_refresh_chat_groups()
+returns trigger
+language plpgsql
+security definer
+set search_path to 'public'
+as $function$
+begin
+  if tg_op in ('INSERT', 'UPDATE') then
+    perform public.refresh_chat_groups(new.country);
+  end if;
+  if tg_op = 'DELETE' then
+    perform public.refresh_chat_groups(old.country);
+  end if;
+  if tg_op = 'UPDATE' and new.country is distinct from old.country then
+    perform public.refresh_chat_groups(old.country);
+  end if;
+  return null;
+end;
+$function$;
+
+drop trigger if exists trg_refresh_chat_groups on public.users;
+create trigger trg_refresh_chat_groups
+after insert or delete or update of role, status, mission, buntai, country
+on public.users
+for each row execute function public.trg_refresh_chat_groups();
+
+-- Backfill immédiat des pays existants
+select public.refresh_chat_groups('BJ');
+select public.refresh_chat_groups('SN')
+
+  
+
+
+  CREATE TABLE IF NOT EXISTS validated_members (
+  user_id TEXT PRIMARY KEY,
+  validated_at TEXT NOT NULL DEFAULT (datetime('now')),
+  sync_status TEXT NOT NULL DEFAULT 'synced'
+);   
+
+
+
+
+

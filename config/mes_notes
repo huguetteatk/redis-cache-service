@@ -1,0 +1,45 @@
+BLOC 1 — Stratégie et marché
+
+1.1 [critique] Le SaaS cible qui : des propriétaires particuliers (B2C), des agences/professionnels de l'immobilier (B2B), des syndics de copropriété, ou une combinaison des trois ?
+1.2 Zone géographique de lancement : Bénin/Afrique de l'Ouest uniquement (devise FCFA, Mobile Money) ou ambition internationale dès le départ ?
+1.3 Modèle économique : abonnement mensuel par bien géré, commission sur transaction, freemium ?
+1.4 Avez-vous des concurrents ou plateformes de référence (Appfolio, Buildium, Rentila, Immoweb, une solution locale) dont vous aimez ou détestez le design ?
+
+BLOC 2 — Rôles utilisateurs
+
+2.1 [critique] Listez tous les profils qui auront un compte : Admin plateforme, Propriétaire/Bailleur, Locataire, Agent immobilier, Gestionnaire/Syndic, Prestataire de maintenance — ajoutez ou retirez selon votre cas.
+2.2 Combien d'interfaces/dashboards distincts cela implique-t-il ? (un design system par rôle a des priorités visuelles différentes — un propriétaire veut des KPI financiers, un locataire veut de la simplicité transactionnelle)
+
+BLOC 3 — Fonctionnalités (modules)
+
+3.1 [critique] Quels modules sont en MVP (premier lancement) ? Cochez ce qui s'applique :
+
+Gestion des biens (fiches, photos, disponibilité)
+Gestion des baux/contrats
+Paiement des loyers (FedaPay/Mobile Money — cohérent avec vos autres projets)
+Tickets de maintenance
+Comptabilité/rapports financiers pour propriétaires
+Messagerie intégrée bailleur-locataire
+Signature électronique de bail
+Visite virtuelle / galerie photo avancée
+3.2 Quels modules sont en V2 (à ne pas concevoir maintenant mais à anticiper dans l'architecture visuelle) ?
+
+BLOC 4 — Identité de marque
+
+4.1 [critique] Nom du produit/de la marque ?
+4.2 Logo existant, ou dois-je proposer une direction ?
+4.3 Couleurs déjà définies, ou palette entièrement à créer ?
+4.4 Tonalité visuelle recherchée : corporate/institutionnel (confiance, sérieux), moderne/minimaliste, premium/luxueux, ou convivial/accessible ?
+4.5 Mode sombre disponible, clair uniquement, ou les deux (comme AURA) ?
+4.6 Typographie imposée, ou liberté de proposition (Sora/Inter ou équivalent) ?
+
+BLOC 5 — Portée technique
+
+5.1 [critique] Web app responsive uniquement, ou aussi application mobile native (cohérence avec votre stack React Native/Expo existante) ?
+5.2 Interface uniquement en français, ou multilingue (français/anglais) ?
+5.3 Contrainte low-bandwidth à respecter (comme évoqué pour le marché béninois sur vos autres projets) ?
+
+BLOC 6 — Périmètre du premier prompt Stitch
+
+6.1 [critique] Combien d'écrans voulez-vous dans ce premier jet ? Exemples : landing page, écran de connexion, dashboard propriétaire, liste des biens, fiche détail d'un bien, dashboard locataire, module paiement — précisez ceux qui sont prioritaires.
+6.2 Layout dominant attendu : sidebar de navigation + zone de contenu (type dashboard SaaS classique), ou navigation top-bar avec cards ?

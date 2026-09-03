@@ -9,7 +9,7 @@ class ProductController
 {
     public function index()
     {
-        $products = Cache::remember(
+        $products = Cache::store('redis')->remember(
             'products:all',
             now()->addMinutes(10),
             function () {
@@ -22,11 +22,11 @@ class ProductController
 
     public function show(string $id)
     {
-        $product = Cache::remember(
+        $product = Cache::store('redis')->remember(
             "product:{$id}",
             now()->addMinutes(10),
             function () use ($id) {
-                return Product::findOrFail($id);
+                return Product::findOrFail($id)->toArray();
             }
         );
 

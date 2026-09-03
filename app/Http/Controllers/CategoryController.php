@@ -10,7 +10,7 @@ class CategoryController
 {
     public function index()
     {
-        $categories = Cache::remember(
+        $categories = Cache::store('redis')->remember(
             'categories:all',
             now()->addMinutes(10),
             function () {
@@ -28,7 +28,7 @@ class CategoryController
             'slug' => $request->slug,
         ]);
 
-        Cache::forget('categories:all');
+        Cache::store('redis')->forget('categories:all');
 
         return response()->json($category, 201);
     }
